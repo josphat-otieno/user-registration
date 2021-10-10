@@ -17,18 +17,20 @@ public class RegistrationController {
   }
 
   @GetMapping("/api/v1/users")
+
   public List<User> getUsers(){
     List<User> users = registrationService.getAllUsers();
     return users;
   }
 
   @PostMapping("/api/v2/register")
+
   public User registerUser(@RequestBody User user) throws Exception {
     String emailId = user.getEmail();
     if(emailId != null && !"".equals(emailId)){
        User user1 = registrationService.getUserByEmail(emailId);
        if (user1 !=null){
-         throw new Exception("User with this "+ emailId + " already exist");
+         throw new Exception("User with this email:"+ emailId + " already exist");
        }
     }
     User user1 = null;
@@ -37,6 +39,7 @@ public class RegistrationController {
   }
 
   @PostMapping("/api/v3/login")
+
   public User loginUser(@RequestBody User user) throws Exception {
     String email = user.getEmail();
     String password = user.getPassword();
